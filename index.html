@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pour Hibah ❤️</title>
 
-<!-- Police romantique -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<!-- Polices romantique et manuscrite -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Dancing+Script&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -22,12 +22,19 @@ body {
     text-align: center;
 }
 
-/* Prénom Hibah */
 h1 {
     font-size: 80px;
     color: #e63946;
     margin-bottom: 40px;
     letter-spacing: 3px;
+}
+
+/* Texte au-dessus du cœur */
+#clickText {
+    font-size: 24px;
+    color: #e63946;
+    margin-bottom: 20px;
+    display: none; /* caché au départ */
 }
 
 /* Gros cœur clignotant */
@@ -36,6 +43,7 @@ h1 {
     cursor: pointer;
     animation: blink 1s infinite;
     margin-bottom: 40px;
+    display: none; /* caché au départ */
 }
 
 @keyframes blink {
@@ -44,17 +52,20 @@ h1 {
     100% { transform: scale(1); }
 }
 
+/* Message romantique en manuscrit italique */
 #message {
     max-width: 600px;
-    font-size: 22px;
+    font-size: 28px;
     color: #e63946;
+    font-family: 'Dancing Script', cursive;
+    font-style: italic;
     opacity: 0;
     transition: opacity 2s ease;
     margin-bottom: 20px;
 }
 
 #startLink {
-    font-size: 18px;
+    font-size: 20px;
     color: #e63946;
     text-decoration: underline;
     cursor: pointer;
@@ -65,7 +76,7 @@ h1 {
     position: absolute;
     font-size: 20px;
     color: #e63946; /* cœurs rouges */
-    animation: explode 1.5s ease-out forwards; /* plus lent */
+    animation: explode 1.5s ease-out forwards;
 }
 
 @keyframes explode {
@@ -74,35 +85,44 @@ h1 {
 }
 </style>
 </head>
-
 <body>
 
 <h1>Hibah</h1>
+
+<!-- Texte au-dessus du cœur -->
+<div id="clickText">Clique sur le cœur ❤️</div>
 
 <!-- Gros cœur clignotant sur la page d'accueil -->
 <div id="heartButton" onclick="showMessage()">❤️</div>
 
 <!-- Message romantique -->
 <div id="message">
-    <strong>Mon bébé 🤍</strong><br><br>
-    J’espère que ta sieste soulage un peu ton petit ventre.<br>
-    Repose-toi bien, ton corps en a besoin.<br>
+    <strong>Mon bébé ❤️</strong><br><br>
+    J’espère que ta sieste a soulagé un peu ton petit ventre.<br>
     Je t’envoie plein de douceur… et un petit câlin invisible<br>
-    pour te faire sourire quand tu te réveilleras ✨
+    pour te faire sourire ✨
 </div>
 
-<!-- Lien pour commencer en bas du message -->
-<div id="startLink" onclick="startGame()">Clique ici pour commencer 💌</div>
+<!-- Lien pour recommencer -->
+<div id="startLink" onclick="restartGame()">Clique ici pour recommencer </div>
 
 <script>
+// Affiche le cœur et le texte au chargement
+function showHeartPage() {
+    document.getElementById("heartButton").style.display = "block";
+    document.getElementById("clickText").style.display = "block";
+    document.getElementById("message").style.opacity = 0;
+    document.getElementById("startLink").style.display = "none";
+}
+
+// Quand on clique sur le cœur
 function showMessage() {
     const message = document.getElementById("message");
     message.style.opacity = "1";
 
-    // Affiche le lien pour continuer
     document.getElementById("startLink").style.display = "block";
 
-    // Explosion de cœurs rouges plus lente et élégante
+    // Explosion de cœurs rouges plus lente
     for (let i = 0; i < 50; i++) {
         let spark = document.createElement("div");
         spark.classList.add("firework");
@@ -121,19 +141,21 @@ function showMessage() {
 
         document.body.appendChild(spark);
 
-        // Explosion plus lente : durée 1.5s
         setTimeout(() => spark.remove(), 1500);
     }
 
-    // Cache le cœur clignotant pour que ce soit plus joli
+    // Cache le cœur et le texte
     document.getElementById("heartButton").style.display = "none";
+    document.getElementById("clickText").style.display = "none";
 }
 
-// Ici tu peux mettre la fonction startGame pour le lien, par exemple une redirection ou autre action
-function startGame() {
-    alert("💌 Le jeu romantique commence maintenant ! 💌");
-    // Tu peux remplacer l'alerte par une redirection ou autre effet
+// Recommencer le jeu
+function restartGame() {
+    showHeartPage();
 }
+
+// Affiche le cœur rouge au chargement
+window.onload = showHeartPage;
 </script>
 
 </body>
