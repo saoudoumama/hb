@@ -22,47 +22,20 @@ body {
     text-align: center;
 }
 
-/* Animation prénom Hibah */
+/* Prénom Hibah */
 h1 {
     font-size: 80px;
     color: #e63946;
     margin-bottom: 40px;
     letter-spacing: 3px;
-    opacity: 0;
-    transform: scale(0.5);
-    animation: fadeZoom 1.5s forwards;
 }
 
-@keyframes fadeZoom {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.top-button {
-    padding: 12px 28px;
-    font-size: 18px;
-    border-radius: 30px;
-    border: 1px solid #e63946;
-    background: white;
-    color: #e63946;
-    cursor: pointer;
-    transition: 0.3s;
-    display: none; /* caché au départ */
-}
-
-.top-button:hover {
-    background: #e63946;
-    color: white;
-}
-
+/* Gros cœur clignotant */
 #heartButton {
     font-size: 90px;
     cursor: pointer;
-    display: none;
     animation: blink 1s infinite;
-    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 @keyframes blink {
@@ -77,27 +50,27 @@ h1 {
     color: #e63946;
     opacity: 0;
     transition: opacity 2s ease;
-    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+#startLink {
+    font-size: 18px;
+    color: #e63946;
+    text-decoration: underline;
+    cursor: pointer;
+    display: none; /* caché au départ */
 }
 
 .firework {
     position: absolute;
     font-size: 20px;
-    color: #e63946; /* tous les cœurs rouges */
-    animation: explode 1s ease-out forwards;
+    color: #e63946; /* cœurs rouges */
+    animation: explode 1.5s ease-out forwards; /* plus lent */
 }
 
 @keyframes explode {
     0% { transform: translate(0, 0); opacity: 1; }
     100% { transform: translate(var(--x), var(--y)); opacity: 0; }
-}
-
-#startLink {
-    margin-top: 50px;
-    font-size: 18px;
-    color: #e63946;
-    text-decoration: underline;
-    cursor: pointer;
 }
 </style>
 </head>
@@ -106,11 +79,10 @@ h1 {
 
 <h1>Hibah</h1>
 
-<!-- Bouton principal caché au départ -->
-<button class="top-button" onclick="showHeart()" id="mainButton">Clique ici ❤️</button>
-
+<!-- Gros cœur clignotant sur la page d'accueil -->
 <div id="heartButton" onclick="showMessage()">❤️</div>
 
+<!-- Message romantique -->
 <div id="message">
     <strong>Mon bébé 🤍</strong><br><br>
     J’espère que ta sieste soulage un peu ton petit ventre.<br>
@@ -119,31 +91,25 @@ h1 {
     pour te faire sourire quand tu te réveilleras ✨
 </div>
 
-<!-- Lien pour commencer -->
+<!-- Lien pour commencer en bas du message -->
 <div id="startLink" onclick="startGame()">Clique ici pour commencer 💌</div>
 
 <script>
-function startGame() {
-    document.getElementById("mainButton").style.display = "inline-block"; // montre le bouton
-    document.getElementById("startLink").style.display = "none"; // cache le lien
-}
-
-function showHeart() {
-    document.getElementById("heartButton").style.display = "block";
-}
-
 function showMessage() {
     const message = document.getElementById("message");
     message.style.opacity = "1";
 
-    // Explosion de cœurs rouges
-    for (let i = 0; i < 80; i++) {
+    // Affiche le lien pour continuer
+    document.getElementById("startLink").style.display = "block";
+
+    // Explosion de cœurs rouges plus lente et élégante
+    for (let i = 0; i < 50; i++) {
         let spark = document.createElement("div");
         spark.classList.add("firework");
         spark.innerHTML = "❤️";
 
         let angle = Math.random() * 2 * Math.PI;
-        let radius = 150 + Math.random() * 200;
+        let radius = 150 + Math.random() * 150;
         let x = Math.cos(angle) * radius + "px";
         let y = Math.sin(angle) * radius + "px";
 
@@ -155,8 +121,18 @@ function showMessage() {
 
         document.body.appendChild(spark);
 
-        setTimeout(() => spark.remove(), 1000);
+        // Explosion plus lente : durée 1.5s
+        setTimeout(() => spark.remove(), 1500);
     }
+
+    // Cache le cœur clignotant pour que ce soit plus joli
+    document.getElementById("heartButton").style.display = "none";
+}
+
+// Ici tu peux mettre la fonction startGame pour le lien, par exemple une redirection ou autre action
+function startGame() {
+    alert("💌 Le jeu romantique commence maintenant ! 💌");
+    // Tu peux remplacer l'alerte par une redirection ou autre effet
 }
 </script>
 
