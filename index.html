@@ -5,46 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pour Hibah 🤍</title>
 
+<!-- Police romantique -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
     height: 100vh;
+    background: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
+    font-family: 'Playfair Display', serif;
     overflow: hidden;
-    font-family: Arial, sans-serif;
     text-align: center;
 }
 
-.container {
-    position: relative;
-    z-index: 2;
-    width: 80%;
-    max-width: 500px;
+h1 {
+    font-size: 80px;
+    color: #e63946;
+    margin-bottom: 40px;
+    letter-spacing: 3px;
 }
 
-button {
-    padding: 15px 30px;
+.top-button {
+    padding: 12px 28px;
     font-size: 18px;
-    border: none;
     border-radius: 30px;
+    border: 1px solid #e63946;
+    background: white;
+    color: #e63946;
     cursor: pointer;
-    background-color: white;
-    transition: 0.3s ease;
+    transition: 0.3s;
 }
 
-button:hover {
-    transform: scale(1.1);
+.top-button:hover {
+    background: #e63946;
+    color: white;
+}
+
+#heartButton {
+    font-size: 90px;
+    cursor: pointer;
+    display: none;
+    animation: blink 1s infinite;
+    margin-top: 40px;
+}
+
+@keyframes blink {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 #message {
-    margin-top: 25px;
-    font-size: 18px;
-    color: white;
+    max-width: 600px;
+    font-size: 22px;
+    color: #e63946;
     opacity: 0;
-    transition: opacity 1.5s ease;
+    transition: opacity 2s ease;
+    margin-top: 30px;
 }
 
 .firework {
@@ -62,27 +83,36 @@ button:hover {
 
 <body>
 
-<div class="container">
-    <button onclick="showLove()">Clique ici 🤍</button>
-    <div id="message">
-        <strong>Mon bébé 🤍</strong><br><br>
-        J’espère que ta sieste a soulagé un peu ton petit ventre.  
-        Je t’envoie plein de douceur… et un petit câlin invisible  
-        pour te faire sourire ✨
-    </div>
+<h1>Hibah</h1>
+
+<button class="top-button" onclick="showHeart()">Clique ici 🤍</button>
+
+<div id="heartButton" onclick="showMessage()">❤️</div>
+
+<div id="message">
+    <strong>Mon bébé 🤍</strong><br><br>
+    J’espère que ta sieste soulage un peu ton petit ventre.<br>
+    Repose-toi bien, ton corps en a besoin.<br>
+    Je t’envoie plein de douceur… et un petit câlin invisible<br>
+    pour te faire sourire quand tu te réveilleras ✨
 </div>
 
 <script>
-function showLove() {
-    document.getElementById("message").style.opacity = "1";
+function showHeart() {
+    document.getElementById("heartButton").style.display = "block";
+}
 
-    for (let i = 0; i < 40; i++) {
+function showMessage() {
+    const message = document.getElementById("message");
+    message.style.opacity = "1";
+
+    for (let i = 0; i < 50; i++) {
         let spark = document.createElement("div");
         spark.classList.add("firework");
-        spark.innerHTML = "🤍";
+        spark.innerHTML = "❤️";
 
         let angle = Math.random() * 2 * Math.PI;
-        let radius = 120 + Math.random() * 80;
+        let radius = 150 + Math.random() * 150;
         let x = Math.cos(angle) * radius + "px";
         let y = Math.sin(angle) * radius + "px";
 
