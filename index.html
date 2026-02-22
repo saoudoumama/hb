@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pour Hibah 🤍</title>
+<title>Pour Hibah ❤️</title>
 
 <!-- Police romantique -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
@@ -22,11 +22,22 @@ body {
     text-align: center;
 }
 
+/* Animation prénom Hibah */
 h1 {
     font-size: 80px;
     color: #e63946;
     margin-bottom: 40px;
     letter-spacing: 3px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: fadeZoom 1.5s forwards;
+}
+
+@keyframes fadeZoom {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .top-button {
@@ -38,6 +49,7 @@ h1 {
     color: #e63946;
     cursor: pointer;
     transition: 0.3s;
+    display: none; /* caché au départ */
 }
 
 .top-button:hover {
@@ -71,12 +83,21 @@ h1 {
 .firework {
     position: absolute;
     font-size: 20px;
+    color: #e63946; /* tous les cœurs rouges */
     animation: explode 1s ease-out forwards;
 }
 
 @keyframes explode {
     0% { transform: translate(0, 0); opacity: 1; }
     100% { transform: translate(var(--x), var(--y)); opacity: 0; }
+}
+
+#startLink {
+    margin-top: 50px;
+    font-size: 18px;
+    color: #e63946;
+    text-decoration: underline;
+    cursor: pointer;
 }
 </style>
 </head>
@@ -85,7 +106,8 @@ h1 {
 
 <h1>Hibah</h1>
 
-<button class="top-button" onclick="showHeart()">Clique ici 🤍</button>
+<!-- Bouton principal caché au départ -->
+<button class="top-button" onclick="showHeart()" id="mainButton">Clique ici ❤️</button>
 
 <div id="heartButton" onclick="showMessage()">❤️</div>
 
@@ -97,7 +119,15 @@ h1 {
     pour te faire sourire quand tu te réveilleras ✨
 </div>
 
+<!-- Lien pour commencer -->
+<div id="startLink" onclick="startGame()">Clique ici pour commencer 💌</div>
+
 <script>
+function startGame() {
+    document.getElementById("mainButton").style.display = "inline-block"; // montre le bouton
+    document.getElementById("startLink").style.display = "none"; // cache le lien
+}
+
 function showHeart() {
     document.getElementById("heartButton").style.display = "block";
 }
@@ -106,13 +136,14 @@ function showMessage() {
     const message = document.getElementById("message");
     message.style.opacity = "1";
 
-    for (let i = 0; i < 50; i++) {
+    // Explosion de cœurs rouges
+    for (let i = 0; i < 80; i++) {
         let spark = document.createElement("div");
         spark.classList.add("firework");
         spark.innerHTML = "❤️";
 
         let angle = Math.random() * 2 * Math.PI;
-        let radius = 150 + Math.random() * 150;
+        let radius = 150 + Math.random() * 200;
         let x = Math.cos(angle) * radius + "px";
         let y = Math.sin(angle) * radius + "px";
 
